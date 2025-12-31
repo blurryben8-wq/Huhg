@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOL FLASHER 2025</title>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f0f1a;
+            --card: #1a1a2e;
+            --accent: #00ff9d;
+            --text: #e0e0ff;
+            --error: #ff3366;
+            --success: #00ff9d;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 480px;
+            background: var(--card);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 255, 157, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8em;
+            margin: 0 0 10px;
+            background: linear-gradient(90deg, #00ff9d, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            opacity: 0.8;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            box-sizing: border-box;
+        }
+        input, select {
+            background: #16213e;
+            color: white;
+        }
+        button {
+            background: linear-gradient(90deg, #00ff9d, #00d4ff);
+            color: black;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.03);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .loader {
+            display: none;
+            margin: 20px auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #16213e;
+            border-top: 5px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 1000;
+        }
+        .toast.success { background: var(--success); color: black; }
+        .toast.error { background: var(--error); color: white; }
+        .presets {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .preset-btn {
+            flex: 1;
+            padding: 10px;
+            background: #16213e;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .preset-btn:hover {
+            background: #00ff9d33;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SOL FLASHER</h1>
+        <p class="subtitle">Instant fake balances for Phantom & Solflare</p>
+
+        <input type="text" id="wallet" placeholder="Wallet address (auto-filled on connect)" readonly>
+
+        <button id="connectBtn">Connect Wallet</button>
+
+        <select id="token">
+            <option value="So11111111111111111111111111111111111111112">SOL</option>
+            <option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+            <option value="Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB">USDT</option>
+        </select>
+
+        <input type="number" id="amount" placeholder="Amount (e.g. 1000000)" min="1" step="1">
+
+        <div class="presets">
+            <div class="preset-btn" onclick="setAmount(10000)">10K</div>
+            <div class="preset-btn" onclick="setAmount(100000)">100K</div>
+            <div class="preset-btn" onclick="setAmount(1000000)">1M</div>
+            <div class="preset-btn" onclick="setAmount(10000000)">10M</div>
+        </div>
+
+        <button id="flashBtn">FLASH BALANCE</button>
+
+        <div class="loader" id="loader"></div>
+
+        <p id="status" style="margin-top: 20px; opacity: 0.7;">Ready</p>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const walletInput = document.getElementById('wallet');
+        const connectBtn = document.getElementById('connectBtn');
+        const flashBtn = document.getElementById('flashBtn');
+        const loader = document.getElementById('loader');
+        const status = document.getElementById('status');
+        const toast = document.getElementById('toast');
+
+        let publicKey = null;
+
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.opacity = 1;
+            setTimeout(() => toast.style.opacity = 0, 4000);
+        }
+
+        function setLoading(show) {
+            loader.style.display = show ? 'block' : 'none';
+            flashBtn.disabled = show;
+            connectBtn.disabled = show;
+        }
+
+        function setStatus(msg) {
+            status.textContent = msg;
+        }
+
+        async function connectWallet() {
+            if (!window.solana?.isPhantom) {
+                showToast('Phantom not detected! Enter address manually.', 'error');
+                return;
+            }
+            setLoading(true);
+            try {
+                const resp = await window.solana.connect();
+                publicKey = resp.publicKey.toString();
+                walletInput.value = publicKey;
+                showToast('Wallet connected!');
+                setStatus(`Connected: ${publicKey.slice(0,8)}...`);
+            } catch (err) {
+                showToast('Connection rejected', 'error');
+            }
+            setLoading(false);
+        }
+
+        function setAmount(val) {
+            document.getElementById('amount').value = val;
+        }
+
+        function flashBalance() {
+            const address = walletInput.value.trim();
+            const amountStr = document.getElementById('amount').value;
+            const tokenMint = document.getElementById('token').value;
+
+            if (!address) return showToast('Enter or connect a wallet first', 'error');
+            if (!amountStr || parseFloat(amountStr) <= 0) return showToast('Enter valid amount', 'error');
+
+            const amount = parseFloat(amountStr);
+            const decimals = tokenMint === "So11111111111111111111111111111111111111112" ? 9 : 6;
+            const lamports = amount * Math.pow(10, decimals);
+
+            setLoading(true);
+            setStatus('Flashing balance...');
+
+            // Inject fake data into common wallet storage keys
+            try {
+                const fakeTokenAccount = {
+                    mint: tokenMint,
+                    owner: address,
+                    amount: lamports.toString(),
+                    decimals: decimals,
+                    uiAmount: amount
+                };
+
+                localStorage.setItem(`phantom:app:solana:account:\( {address}: \){tokenMint}`, JSON.stringify(fakeTokenAccount));
+                localStorage.setItem(`solflare:tokenAccounts:${address}`, JSON.stringify([fakeTokenAccount]));
+                localStorage.setItem(`balance:${address}`, amount * 1e9); // for SOL
+
+                // Trigger wallet refresh
+                if (window.solana) {
+                    window.solana.request({ method: "getLatestBlockhash" }).catch(() => {});
+                }
+
+                setTimeout(() => {
+                    setLoading(false);
+                    showToast(`Flashed ${amount.toLocaleString()} tokens!`);
+                    setStatus('Success! Refresh your wallet to see fake balance.');
+                }, 1500);
+            } catch (e) {
+                setLoading(false);
+                showToast('Flash failed (try refreshing page)', 'error');
+            }
+        }
+
+        connectBtn.onclick = connectWallet;
+        flashBtn.onclick = flashBalance;
+
+        // Auto-connect on load
+        window.addEventListener('load', () => {
+            if (window.solana?.isPhantom) {
+                window.solana.connect({ onlyIfTrusted: true }).then(({ publicKey }) => {
+                    walletInput.value = publicKey.toString();
+                    showToast('Auto-connected trusted wallet');
+                }).catch(() => {});
+            }
+        });
+    </script>
+</body>
+</html>
