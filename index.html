@@ -6,162 +6,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --bg: #0b0f1a;
-  --panel: #12172b;
-  --card: #171d36;
-  --accent: #ff4fb5;
-  --accent2: #4f8cff;
-  --text: #e6ebff;
-  --muted: #9aa4d6;
-  --green: #2ecc71;
-  --yellow: #f1c40f;
-  --red: #e74c3c;
-}
-
-* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* HEADER / LOGO */
-header {
-  padding: 18px 24px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-
-header h1 {
-  font-size: 22px;
-  margin: 0;
-  font-weight: 700;
-}
-
-.stats {
-  font-size: 13px;
-}
-
-/* TOP BAR */
-.topbar {
-  padding: 15px 20px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: var(--panel);
-  border-bottom: 1px solid #22293f;
-  align-items: center;
-}
-
-.search {
-  flex: 1;
-  min-width: 200px;
-}
-
-.search input {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: none;
-  background: var(--card);
-  color: var(--text);
-}
-
-button {
-  background: var(--card);
-  color: var(--text);
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button.active {
-  background: var(--accent2);
-  color: #fff;
-}
-
-/* FILTER BUTTONS */
-.filter-btn {
-  font-size: 12px;
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 15px;
-  padding: 20px;
-}
-
-.card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 15px;
-  transition: 0.2s;
-  position: relative;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-}
-
-.token {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.muted {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.stat {
-  margin-top: 6px;
-  font-size: 14px;
-}
-
-a {
-  color: var(--accent2);
-  text-decoration: none;
-}
-
-/* BADGES */
-.badge {
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-right: 4px;
-  color: #fff;
-}
-
-.badge.green { background: var(--green); }
-.badge.yellow { background: var(--yellow); color:#000; }
-.badge.red { background: var(--red); }
-
-.favorite {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  user-select: none;
-  color: var(--muted);
-}
-
-.favorite.active { color: var(--accent); }
-
+/* (Same styling as before — you can paste the previous CSS here) */
+body { margin:0; background:#0b0f1a; color:#e6ebff; font-family:'Inter',sans-serif;}
+header{padding:18px 24px;background:linear-gradient(90deg,#ff4fb5,#4f8cff);display:flex;justify-content:space-between;align-items:center;}
+header h1{margin:0;font-size:22px;}
+.topbar{padding:15px 20px;display:flex;gap:10px;flex-wrap:wrap;background:#12172b;}
+.search input{flex:1;padding:10px;border-radius:8px;border:none;background:#171d36;color:#e6ebff;}
+button{background:#171d36;color:#e6ebff;border:none;padding:10px;border-radius:8px;cursor:pointer;}
+button.active{background:#4f8cff;color:#fff;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;padding:20px;}
+.card{background:#171d36;padding:15px;border-radius:12px;position:relative;}
+.favorite{position:absolute;top:12px;right:12px;font-size:18px;cursor:pointer;color:#9aa4d6;}
+.favorite.active{color:#ff4fb5;}
+.muted{font-size:13px;color:#9aa4d6;}
+.stat{font-size:14px;margin-top:6px;}
+a{color:#4f8cff;text-decoration:none;}
 </style>
 </head>
 
@@ -169,135 +29,73 @@ a {
 
 <header>
   <h1>PIMPING</h1>
-  <div class="stats" id="stats">Loading...</div>
+  <div id="stats">Initializing...</div>
 </header>
 
 <div class="topbar">
-  <div class="search">
-    <input type="text" id="search" placeholder="Search token or symbol...">
-  </div>
-
-  <button onclick="switchChain('ethereum', this)" class="active">ETH</button>
-  <button onclick="switchChain('bsc', this)">BSC</button>
-  <button onclick="switchChain('solana', this)">SOL</button>
-
-  <button class="filter-btn" onclick="setTimeFilter('1h')">🕐 1h</button>
-  <button class="filter-btn" onclick="setTimeFilter('6h')">6h</button>
-  <button class="filter-btn" onclick="setTimeFilter('24h')">24h</button>
-
+  <input type="text" id="search" placeholder="Search memecoins (e.g., doge, shib...)">
+  <button onclick="runSearch()">Search</button>
   <button onclick="refresh()">🔄 Refresh</button>
 </div>
 
 <div class="grid" id="grid"></div>
 
 <script>
-let pairs = [];
-let currentChain = 'ethereum';
-let timeFilter = '24h';
 const grid = document.getElementById('grid');
 const stats = document.getElementById('stats');
-const search = document.getElementById('search');
+const searchInput = document.getElementById('search');
 
-const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+let currentData = [];
 
-function setActive(btn) {
-  document.querySelectorAll('.topbar button').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function setTimeFilter(tf) {
-  timeFilter = tf;
-  render();
-}
-
-// Fetch pairs
-async function loadPairs() {
-  grid.innerHTML = 'Loading real memecoins...';
-  const res = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${currentChain}`);
-  const data = await res.json();
-
-  const now = Date.now()/1000;
-  pairs = data.pairs
-    .map(p => {
-      p.ageHours = (now - p.pairCreatedAt)/3600;
-      return p;
-    })
-    .filter(p => {
-      if(timeFilter==='1h') return p.ageHours<=1;
-      if(timeFilter==='6h') return p.ageHours<=6;
-      return true;
-    })
-    .slice(0, 50);
-
-  stats.innerText = `Chain: ${currentChain.toUpperCase()} • Pairs loaded: ${pairs.length}`;
-  render();
-}
-
-// Render cards
-function render() {
-  const q = search.value.toLowerCase();
-  grid.innerHTML = '';
-
-  pairs
-    .filter(p =>
-      p.baseToken.name.toLowerCase().includes(q) ||
-      p.baseToken.symbol.toLowerCase().includes(q)
-    )
-    .forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'card';
-
-      // Risk badge
-      let riskBadge='';
-      if(p.liquidity.usd<5000 || p.ageHours<0.25) riskBadge='<span class="badge red">High Risk</span>';
-      else if(p.liquidity.usd<20000) riskBadge='<span class="badge yellow">Medium</span>';
-      else riskBadge='<span class="badge green">Safe</span>';
-
-      // Favorite
-      const favActive = favorites.includes(p.pairAddress)?'active':'';
-      
-      card.innerHTML = `
-        <div class="favorite ${favActive}" onclick="toggleFavorite('${p.pairAddress}', this)">⭐</div>
-        <div class="token">${p.baseToken.name} (${p.baseToken.symbol}) ${riskBadge}</div>
-        <div class="muted">${p.dexId.toUpperCase()} • ${p.chainId}</div>
-
-        <div class="stat">💰 Price: $${Number(p.priceUsd).toFixed(6)}</div>
-        <div class="stat">📊 Volume 24h: $${p.volume.h24.toLocaleString()}</div>
-        <div class="stat">💧 Liquidity: $${p.liquidity.usd.toLocaleString()}</div>
-        <div class="stat">⏱️ Age: ${p.ageHours.toFixed(2)}h</div>
-        <div class="stat">
-          <a href="${p.url}" target="_blank">View Chart →</a>
-        </div>
-      `;
-
-      grid.appendChild(card);
-    });
-}
-
-// Favorites
-function toggleFavorite(addr, el){
-  if(favorites.includes(addr)){
-    favorites.splice(favorites.indexOf(addr),1);
-    el.classList.remove('active');
-  } else {
-    favorites.push(addr);
-    el.classList.add('active');
+async function fetchPairs(query='') {
+  stats.innerText = 'Fetching data…';
+  try {
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(query)}`);
+    const json = await res.json();
+    return json.pairs || [];
+  } catch(e) {
+    console.error(e);
+    return [];
   }
-  localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
-function switchChain(chain, btn){
-  currentChain = chain;
-  setActive(btn);
-  loadPairs();
+function render(pairs) {
+  grid.innerHTML = '';
+  stats.innerText = `Showing ${pairs.length} results`;
+
+  if(!pairs.length){
+    grid.innerHTML = `<div style="color:#9aa4d6;font-size:18px;">No results found</div>`;
+    return;
+  }
+
+  pairs.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="token">${p.baseToken.name} (${p.baseToken.symbol})</div>
+      <div class="muted">${p.dexId.toUpperCase()} • ${p.chainId}</div>
+      <div class="stat">Price: $${Number(p.priceUsd).toFixed(6)}</div>
+      <div class="stat">Volume 24h: $${p.volume.h24.toLocaleString()}</div>
+      <div class="stat">Liquidity: $${p.liquidity.usd.toLocaleString()}</div>
+      <div class="stat"><a href="${p.url}" target="_blank">View Chart →</a></div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
-function refresh(){ loadPairs(); }
+async function runSearch(){
+  const q = searchInput.value.trim();
+  const data = await fetchPairs(q);
+  render(data);
+}
 
-search.addEventListener('input', render);
+async function refresh(){
+  const data = await fetchPairs(searchInput.value.trim());
+  render(data);
+}
 
-// Init
-loadPairs();
+// load default on open
+runSearch();
 </script>
 
 </body>
